@@ -1,4 +1,4 @@
-package net.jcip.examples;
+package net.jcip.examples.chapter7;
 
 import java.math.BigInteger;
 import java.util.concurrent.*;
@@ -11,6 +11,7 @@ import java.util.concurrent.*;
  * @author Brian Goetz and Tim Peierls
  */
 class BrokenPrimeProducer extends Thread {
+
     private final BlockingQueue<BigInteger> queue;
     private volatile boolean cancelled = false;
 
@@ -21,9 +22,11 @@ class BrokenPrimeProducer extends Thread {
     public void run() {
         try {
             BigInteger p = BigInteger.ONE;
-            while (!cancelled)
+            while (!cancelled) {
                 queue.put(p = p.nextProbablePrime());
-        } catch (InterruptedException consumed) {
+            }
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 
