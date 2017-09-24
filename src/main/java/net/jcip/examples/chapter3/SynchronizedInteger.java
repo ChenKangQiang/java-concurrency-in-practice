@@ -1,4 +1,4 @@
-package net.jcip.examples;
+package net.jcip.examples.chapter3;
 
 import net.jcip.annotations.*;
 
@@ -11,6 +11,7 @@ import net.jcip.annotations.*;
  */
 @ThreadSafe
 public class SynchronizedInteger {
+
     @GuardedBy("this") private int value;
 
     public synchronized int get() {

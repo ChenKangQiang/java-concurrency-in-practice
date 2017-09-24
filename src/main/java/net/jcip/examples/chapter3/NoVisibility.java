@@ -1,4 +1,4 @@
-package net.jcip.examples;
+package net.jcip.examples.chapter3;
 
 /**
  * NoVisibility
@@ -6,16 +6,20 @@ package net.jcip.examples;
  * Sharing variables without synchronization
  *
  * @author Brian Goetz and Tim Peierls
+ *
+ *
+ * 同步的另一个目的是确保可见性
  */
 
 public class NoVisibility {
-    private static boolean ready;
-    private static int number;
+    private static boolean ready = false;
+    private static int number = 0;
 
     private static class ReaderThread extends Thread {
         public void run() {
-            while (!ready)
+            while (!ready) {
                 Thread.yield();
+            }
             System.out.println(number);
         }
     }
